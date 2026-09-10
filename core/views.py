@@ -87,5 +87,8 @@ def scanner(request):
                     "confidence": 0
                 }
             )
+def recommendation(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
 
-    return render(request, "core/scanner.html")
+    return render(request, "core/recommendation.html")
