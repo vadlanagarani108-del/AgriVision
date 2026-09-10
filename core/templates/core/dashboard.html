@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Dashboard | AgriVision</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+    <style>
+        .dashboard-page {
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .dashboard-header {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dashboard-logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #14532d;
+        }
+
+        .welcome-text {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .dashboard-intro {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-intro h1 {
+            color: #14532d;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-intro p {
+            color: #64748b;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        .dashboard-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 8px;
+            color: #14532d;
+        }
+
+        .dashboard-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .dashboard-card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #16a34a;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .quick-insight {
+            margin-top: 35px;
+            background: linear-gradient(135deg, #dcfce7, #e0f2fe);
+            padding: 28px;
+            border-radius: 18px;
+        }
+
+        @media (max-width: 800px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .dashboard-header {
+                padding: 16px 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-page">
+
+    <header class="dashboard-header">
+        <div class="dashboard-logo">
+            🌱 AgriVision
+        </div>
+
+        <div class="welcome-text">
+            Welcome, Farmer 👨‍🌾
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+
+        <div class="dashboard-intro">
+            <h1>Farmer Dashboard</h1>
+            <p>
+                Manage your farm and access smart agricultural insights
+                from one place.
+            </p>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">🌾</div>
+                <h3>Crop Recommendation</h3>
+                <p>
+                    Get suitable crop suggestions based on soil,
+                    weather and farm conditions.
+                </p>
+                <a href="#">Explore →</a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">📸</div>
+                <h3>Crop Scanner</h3>
+                <p>
+                    Upload a crop or vegetable image for AI-based
+                    identification and health insights.
+                </p>
+                <a href="{% url 'scanner' %}">Scan Crop →</a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">🌦️</div>
+                <h3>Weather</h3>
+                <p>
+                    Check location-based weather conditions and
+                    farming alerts.
+                </p>
+                <a href="#">View Weather →</a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">💧</div>
+                <h3>Smart Irrigation</h3>
+                <p>
+                    Get irrigation guidance using crop, soil and
+                    weather information.
+                </p>
+                <a href="#">View Advice →</a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">💰</div>
+                <h3>Market Insights</h3>
+                <p>
+                    View available current market information
+                    for your crops.
+                </p>
+                <a href="#">Check Market →</a>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">🤖</div>
+                <h3>AI Agriculture Assistant</h3>
+                <p>
+                    Ask agriculture-related questions and get
+                    useful guidance.
+                </p>
+                <a href="#">Ask AI →</a>
+            </div>
+
+        </div>
+
+        <div class="quick-insight">
+            <h2>🌱 Your Farm at a Glance</h2>
+            <p>
+                Your personalized farm information, crop history,
+                alerts and recommendations will appear here.
+            </p>
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

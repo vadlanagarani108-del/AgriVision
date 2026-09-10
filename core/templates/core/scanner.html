@@ -1,0 +1,57 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="upload-box">
+        <label for="crop_image">📷 Select Crop Image</label>
+        <input
+            type="file"
+            id="crop_image"
+            name="crop_image"
+            accept="image/*"
+            required
+        >
+    </div>
+
+    <button type="submit">🔍 Analyze Crop</button>
+</form>
+
+{% if analysis %}
+<div class="scanner-result">
+
+    <h2>🌿 AI Crop Analysis</h2>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            🌾
+            <h3>Crop</h3>
+            <p>{{ analysis.crop_name|default:"Analysis pending" }}</p>
+        </div>
+
+        <div class="info-card">
+            🩺
+            <h3>Health</h3>
+            <p>{{ analysis.health_status|default:"Analysis pending" }}</p>
+        </div>
+
+        <div class="info-card">
+            🔬
+            <h3>Possible Disease</h3>
+            <p>{{ analysis.possible_disease|default:"Analysis pending" }}</p>
+        </div>
+
+        <div class="info-card">
+            💧
+            <h3>Care Advice</h3>
+            <p>{{ analysis.care_advice|default:"Analysis pending" }}</p>
+        </div>
+        <div class="info-card">
+    🎯
+    <h3>AI Confidence</h3>
+    <p>{{ confidence }}%</p>
+</div>
+
+    </div>
+
+</div>
+{% endif %}

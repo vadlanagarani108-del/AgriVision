@@ -1,0 +1,300 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriVision | Smart Farming</title>
+
+    <meta name="description"
+          content="AgriVision - Smart farming assistance for crop health, weather, irrigation and market insights.">
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            🌱 <span>AgriVision</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="language-btn">తెలుగు | English</button>
+            <a href="#" class="login-btn">Login</a>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <main>
+
+        <section id="home" class="hero">
+
+            <div class="hero-content">
+
+                <span class="badge">🌾 Smart Agriculture Platform</span>
+
+                <h1>
+                    Smart Farming.
+                    <span>Better Decisions.</span>
+                </h1>
+
+                <p>
+                    AgriVision helps farmers make smarter decisions using
+                    AI-powered crop insights, weather information,
+                    crop health analysis and agricultural recommendations.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#features" class="primary-btn">
+                        Explore AgriVision →
+                    </a>
+
+                    <a href="#scanner" class="secondary-btn">
+                        📸 Scan Your Crop
+                    </a>
+                </div>
+
+                <div class="trust-text">
+                    🌱 Farmer-friendly &nbsp; • &nbsp;
+                    🤖 AI-powered &nbsp; • &nbsp;
+                    📱 Mobile-friendly
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="card-top">
+                    <span>🌤️ Today's Farm Insight</span>
+                    <span class="status">● Live</span>
+                </div>
+
+                <div class="weather-preview">
+                    <div>
+                        <small>Weather</small>
+                        <h2>29°C</h2>
+                        <p>Partly Cloudy</p>
+                    </div>
+
+                    <div class="weather-icon">
+                        🌤️
+                    </div>
+                </div>
+
+                <div class="insight-list">
+
+                    <div class="insight">
+                        <span>💧</span>
+                        <div>
+                            <strong>Irrigation</strong>
+                            <p>Check soil moisture</p>
+                        </div>
+                    </div>
+
+                    <div class="insight">
+                        <span>🌾</span>
+                        <div>
+                            <strong>Crop Health</strong>
+                            <p>Monitor your crop regularly</p>
+                        </div>
+                    </div>
+
+                    <div class="insight">
+                        <span>🔔</span>
+                        <div>
+                            <strong>Farm Alert</strong>
+                            <p>Stay updated with weather</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Features -->
+        <section id="features" class="features-section">
+
+            <div class="section-heading">
+                <span class="small-title">WHAT AGRIVISION OFFERS</span>
+
+                <h2>
+                    Everything you need for
+                    <span>smarter farming</span>
+                </h2>
+
+                <p>
+                    Simple tools designed to help farmers understand,
+                    monitor and manage their crops.
+                </p>
+            </div>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-icon">🌾</div>
+                    <h3>Crop Recommendation</h3>
+                    <p>
+                        Get crop suggestions based on soil,
+                        weather and farm conditions.
+                    </p>
+                    <a href="#">Explore →</a>
+                </article>
+
+
+                <article class="feature-card highlight-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Crop & Vegetable Scanner</h3>
+                    <p>
+                        Upload a crop or vegetable image
+                        and get useful AI-based insights.
+                    </p>
+                    <a href="#scanner">Scan Now →</a>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-icon">🌦️</div>
+                    <h3>Real-Time Weather</h3>
+                    <p>
+                        View location-based weather information
+                        and important farming alerts.
+                    </p>
+                    <a href="#">Check Weather →</a>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-icon">💧</div>
+                    <h3>Smart Irrigation</h3>
+                    <p>
+                        Receive irrigation guidance using
+                        available soil, crop and weather data.
+                    </p>
+                    <a href="#">View Advice →</a>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Market Insights</h3>
+                    <p>
+                        Check available current market information
+                        for selected crops.
+                    </p>
+                    <a href="#">View Prices →</a>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Agriculture Assistant</h3>
+                    <p>
+                        Ask agriculture-related questions
+                        through a simple farmer-friendly interface.
+                    </p>
+                    <a href="#">Ask AI →</a>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Scanner Preview -->
+        <section id="scanner" class="scanner-section">
+
+            <div class="scanner-content">
+
+                <span class="small-title">AI CROP ANALYSIS</span>
+
+                <h2>
+                    Turn a simple photo into
+                    <span>useful farm insights.</span>
+                </h2>
+
+                <p>
+                    Upload a crop or vegetable image.
+                    AgriVision will analyze the image and provide
+                    relevant information that can be safely assessed
+                    from the available data.
+                </p>
+
+                <ul>
+                    <li>📸 Crop / vegetable identification</li>
+                    <li>🌱 Visible health indicators</li>
+                    <li>🐛 Possible disease detection</li>
+                    <li>💰 Available market information</li>
+                    <li>🤖 AI-based guidance</li>
+                </ul>
+
+                <button class="primary-btn">
+                    📷 Scan Your Crop
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- About -->
+        <section id="about" class="about-section">
+
+            <div class="section-heading">
+                <span class="small-title">ABOUT AGRIVISION</span>
+
+                <h2>
+                    Technology that works
+                    <span>for farmers.</span>
+                </h2>
+
+                <p>
+                    AgriVision is designed to bring useful agricultural
+                    information together in one simple platform.
+                    Our goal is to make technology easier to understand
+                    and more useful for everyday farming decisions.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer id="contact">
+
+        <div class="footer-logo">
+            🌱 AgriVision
+        </div>
+
+        <p>
+            Smart Farming. Better Decisions.
+        </p>
+
+        <div class="footer-bottom">
+            © 2026 AgriVision. Built for smarter agriculture.
+        </div>
+
+    </footer>
+
+
+    <script src="{% static 'core/js/script.js' %}"></script>
+
+</body>
+</html>
