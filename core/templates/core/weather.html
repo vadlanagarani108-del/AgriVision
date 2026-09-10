@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather | AgriVision</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+    <style>
+        .feature-page {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding-bottom: 50px;
+        }
+
+        .feature-header {
+            background: white;
+            padding: 18px 6%;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feature-logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #14532d;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #15803d;
+            font-weight: 700;
+        }
+
+        .feature-content {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .feature-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .feature-title h1 {
+            color: #14532d;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .feature-title p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .weather-card {
+            background: linear-gradient(135deg, #dbeafe, #ecfeff);
+            border-radius: 22px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .location {
+            font-size: 18px;
+            font-weight: 700;
+            color: #14532d;
+            margin-bottom: 15px;
+        }
+
+        .weather-icon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        .temperature {
+            font-size: 48px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .condition {
+            font-size: 20px;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .weather-info {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .weather-info h3 {
+            color: #14532d;
+            margin-bottom: 8px;
+        }
+
+        .weather-info p {
+            color: #64748b;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .notice {
+            margin-top: 25px;
+            background: #dcfce7;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            border-radius: 12px;
+            color: #166534;
+        }
+
+        @media (max-width: 700px) {
+            .weather-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-title h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="feature-page">
+
+    <header class="feature-header">
+        <div class="feature-logo">🌱 AgriVision</div>
+
+        <a href="{% url 'dashboard' %}" class="back-btn">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="feature-content">
+
+        <div class="feature-title">
+            <h1>🌦️ Weather Insights</h1>
+            <p>Weather information to support better farming decisions.</p>
+        </div>
+
+        <div class="weather-card">
+
+            <div class="location">📍 Local Farm Weather</div>
+
+            <div class="weather-icon">🌤️</div>
+
+            <div class="temperature">
+    {% if weather %}
+        {{ weather.temperature }}°C
+    {% else %}
+        Weather unavailable
+    {% endif %}
+</div>
+
+            <div class="condition">
+                Partly Cloudy
+            </div>
+
+            <div class="weather-grid">
+
+                <div class="weather-info">
+                    <h3>💧 Humidity</h3>
+                    <p>
+    {% if weather %}
+        {{ weather.humidity }}%
+    {% else %}
+        --
+    {% endif %}
+</p>
+                </div>
+
+                <div class="weather-info">
+                    <h3>💨 Wind</h3>
+                    <p>
+    {% if weather %}
+        {{ weather.wind }} km/h
+    {% else %}
+        --
+    {% endif %}
+</p>
+                </div>
+
+                <div class="weather-info">
+                    <h3>🌧️ Rain Chance</h3>
+                    <p>
+    {% if weather %}
+        {{ weather.rain_chance }}%
+    {% else %}
+        --
+    {% endif %}
+</p>
+                </div>
+
+            </div>
+
+            <div class="notice">
+                🌱 Current weather conditions can help farmers plan
+                irrigation, crop monitoring, and field activities.
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

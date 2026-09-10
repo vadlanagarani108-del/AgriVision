@@ -29,20 +29,28 @@
         </nav>
 
         <div class="nav-actions">
-            <button class="language-btn">తెలుగు | English</button>
-            <a href="#" class="login-btn">Login</a>
+            <button class="language-btn" type="button">
+                తెలుగు | English
+            </button>
+
+            <a href="{% url 'login' %}" class="login-btn">
+                Login
+            </a>
         </div>
     </header>
 
 
-    <!-- Hero Section -->
+    <!-- Main Content -->
     <main>
 
+        <!-- Hero Section -->
         <section id="home" class="hero">
 
             <div class="hero-content">
 
-                <span class="badge">🌾 Smart Agriculture Platform</span>
+                <span class="badge">
+                    🌾 Smart Agriculture Platform
+                </span>
 
                 <h1>
                     Smart Farming.
@@ -56,13 +64,15 @@
                 </p>
 
                 <div class="hero-buttons">
+
                     <a href="#features" class="primary-btn">
                         Explore AgriVision →
                     </a>
 
-                    <a href="#scanner" class="secondary-btn">
+                    <a href="{% url 'scanner' %}" class="secondary-btn">
                         📸 Scan Your Crop
                     </a>
+
                 </div>
 
                 <div class="trust-text">
@@ -74,6 +84,7 @@
             </div>
 
 
+            <!-- Farm Insight Card -->
             <div class="hero-card">
 
                 <div class="card-top">
@@ -82,6 +93,7 @@
                 </div>
 
                 <div class="weather-preview">
+
                     <div>
                         <small>Weather</small>
                         <h2>29°C</h2>
@@ -91,28 +103,34 @@
                     <div class="weather-icon">
                         🌤️
                     </div>
+
                 </div>
 
                 <div class="insight-list">
 
                     <div class="insight">
                         <span>💧</span>
+
                         <div>
                             <strong>Irrigation</strong>
                             <p>Check soil moisture</p>
                         </div>
                     </div>
 
+
                     <div class="insight">
                         <span>🌾</span>
+
                         <div>
                             <strong>Crop Health</strong>
                             <p>Monitor your crop regularly</p>
                         </div>
                     </div>
 
+
                     <div class="insight">
                         <span>🔔</span>
+
                         <div>
                             <strong>Farm Alert</strong>
                             <p>Stay updated with weather</p>
@@ -126,11 +144,14 @@
         </section>
 
 
-        <!-- Features -->
+        <!-- Features Section -->
         <section id="features" class="features-section">
 
             <div class="section-heading">
-                <span class="small-title">WHAT AGRIVISION OFFERS</span>
+
+                <span class="small-title">
+                    WHAT AGRIVISION OFFERS
+                </span>
 
                 <h2>
                     Everything you need for
@@ -141,74 +162,147 @@
                     Simple tools designed to help farmers understand,
                     monitor and manage their crops.
                 </p>
+
             </div>
 
 
             <div class="feature-grid">
 
+                <!-- Crop Recommendation -->
                 <article class="feature-card">
-                    <div class="feature-icon">🌾</div>
-                    <h3>Crop Recommendation</h3>
+
+                    <div class="feature-icon">
+                        🌾
+                    </div>
+
+                    <h3>
+                        Crop Recommendation
+                    </h3>
+
                     <p>
                         Get crop suggestions based on soil,
                         weather and farm conditions.
                     </p>
-                    <a href="#">Explore →</a>
+
+                    <a href="{% url 'recommendation' %}">
+                        Explore →
+                    </a>
+
                 </article>
 
 
+                <!-- Crop Scanner -->
                 <article class="feature-card highlight-card">
-                    <div class="feature-icon">📸</div>
-                    <h3>Crop & Vegetable Scanner</h3>
+
+                    <div class="feature-icon">
+                        📸
+                    </div>
+
+                    <h3>
+                        Crop & Vegetable Scanner
+                    </h3>
+
                     <p>
                         Upload a crop or vegetable image
                         and get useful AI-based insights.
                     </p>
-                    <a href="#scanner">Scan Now →</a>
+
+                    <a href="{% url 'scanner' %}">
+                        Scan Now →
+                    </a>
+
                 </article>
 
 
+                <!-- Weather -->
                 <article class="feature-card">
-                    <div class="feature-icon">🌦️</div>
-                    <h3>Real-Time Weather</h3>
+
+                    <div class="feature-icon">
+                        🌦️
+                    </div>
+
+                    <h3>
+                        Real-Time Weather
+                    </h3>
+
                     <p>
                         View location-based weather information
                         and important farming alerts.
                     </p>
-                    <a href="#">Check Weather →</a>
+
+                    <a href="{% url 'weather' %}">
+                        Check Weather →
+                    </a>
+
                 </article>
 
 
+                <!-- Irrigation -->
                 <article class="feature-card">
-                    <div class="feature-icon">💧</div>
-                    <h3>Smart Irrigation</h3>
+
+                    <div class="feature-icon">
+                        💧
+                    </div>
+
+                    <h3>
+                        Smart Irrigation
+                    </h3>
+
                     <p>
                         Receive irrigation guidance using
                         available soil, crop and weather data.
                     </p>
-                    <a href="#">View Advice →</a>
+
+                    <a href="{% url 'irrigation' %}">
+                        View Advice →
+                    </a>
+
                 </article>
 
 
+                <!-- Market -->
                 <article class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Market Insights</h3>
+
+                    <div class="feature-icon">
+                        💰
+                    </div>
+
+                    <h3>
+                        Market Insights
+                    </h3>
+
                     <p>
                         Check available current market information
                         for selected crops.
                     </p>
-                    <a href="#">View Prices →</a>
+
+                    <a href="{% url 'market' %}">
+                        View Prices →
+                    </a>
+
                 </article>
 
 
+                <!-- AI Assistant -->
                 <article class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Agriculture Assistant</h3>
+
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        AI Agriculture Assistant
+                    </h3>
+
                     <p>
                         Ask agriculture-related questions
                         through a simple farmer-friendly interface.
                     </p>
-                    <a href="#">Ask AI →</a>
+
+                    <a href="{% url 'ai_assistant' %}">
+                        Ask AI →
+                    </a>
+
                 </article>
 
             </div>
@@ -221,7 +315,9 @@
 
             <div class="scanner-content">
 
-                <span class="small-title">AI CROP ANALYSIS</span>
+                <span class="small-title">
+                    AI CROP ANALYSIS
+                </span>
 
                 <h2>
                     Turn a simple photo into
@@ -243,20 +339,23 @@
                     <li>🤖 AI-based guidance</li>
                 </ul>
 
-                <button class="primary-btn">
+                <a href="{% url 'scanner' %}" class="primary-btn">
                     📷 Scan Your Crop
-                </button>
+                </a>
 
             </div>
 
         </section>
 
 
-        <!-- About -->
+        <!-- About Section -->
         <section id="about" class="about-section">
 
             <div class="section-heading">
-                <span class="small-title">ABOUT AGRIVISION</span>
+
+                <span class="small-title">
+                    ABOUT AGRIVISION
+                </span>
 
                 <h2>
                     Technology that works
@@ -269,6 +368,7 @@
                     Our goal is to make technology easier to understand
                     and more useful for everyday farming decisions.
                 </p>
+
             </div>
 
         </section>

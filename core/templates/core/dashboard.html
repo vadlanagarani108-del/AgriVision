@@ -30,9 +30,31 @@
             color: #14532d;
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .welcome-text {
             color: #64748b;
             font-size: 14px;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            color: #14532d;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .dashboard-content {
@@ -91,6 +113,10 @@
             text-decoration: none;
         }
 
+        .dashboard-card a:hover {
+            text-decoration: underline;
+        }
+
         .quick-insight {
             margin-top: 35px;
             background: linear-gradient(135deg, #dcfce7, #e0f2fe);
@@ -109,6 +135,12 @@
                 padding: 16px 20px;
             }
 
+            .header-right {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
@@ -121,100 +153,338 @@
 <div class="dashboard-page">
 
     <header class="dashboard-header">
+
         <div class="dashboard-logo">
             🌱 AgriVision
         </div>
 
-        <div class="welcome-text">
-            Welcome, Farmer 👨‍🌾
+        <div class="header-right">
+
+            <div class="welcome-text" id="welcome-text">
+                Welcome, Farmer 👨‍🌾
+            </div>
+
+            <div class="language-selector">
+                🌐
+                <select onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+
         </div>
+
     </header>
+
 
     <main class="dashboard-content">
 
         <div class="dashboard-intro">
-            <h1>Farmer Dashboard</h1>
-            <p>
+            <h1 id="dashboard-title">Farmer Dashboard</h1>
+
+            <p id="dashboard-description">
                 Manage your farm and access smart agricultural insights
                 from one place.
             </p>
         </div>
 
+
         <div class="dashboard-grid">
 
+            <!-- Crop Recommendation -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">🌾</div>
-                <h3>Crop Recommendation</h3>
-                <p>
+
+                <h3 id="crop-title">
+                    Crop Recommendation
+                </h3>
+
+                <p id="crop-description">
                     Get suitable crop suggestions based on soil,
                     weather and farm conditions.
                 </p>
-                <a href="#">Explore →</a>
+
+                <a href="{% url 'recommendation' %}" id="crop-link">
+                    Explore →
+                </a>
+
             </div>
 
+
+            <!-- Crop Scanner -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">📸</div>
-                <h3>Crop Scanner</h3>
-                <p>
+
+                <h3 id="scanner-title">
+                    Crop Scanner
+                </h3>
+
+                <p id="scanner-description">
                     Upload a crop or vegetable image for AI-based
                     identification and health insights.
                 </p>
-                <a href="{% url 'scanner' %}">Scan Crop →</a>
+
+                <a href="{% url 'scanner' %}" id="scanner-link">
+                    Scan Crop →
+                </a>
+
             </div>
 
+
+            <!-- Weather -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">🌦️</div>
-                <h3>Weather</h3>
-                <p>
+
+                <h3 id="weather-title">
+                    Weather
+                </h3>
+
+                <p id="weather-description">
                     Check location-based weather conditions and
                     farming alerts.
                 </p>
-                <a href="#">View Weather →</a>
+
+                <a href="{% url 'weather' %}" id="weather-link">
+                    View Weather →
+                </a>
+
             </div>
 
+
+            <!-- Irrigation -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">💧</div>
-                <h3>Smart Irrigation</h3>
-                <p>
+
+                <h3 id="irrigation-title">
+                    Smart Irrigation
+                </h3>
+
+                <p id="irrigation-description">
                     Get irrigation guidance using crop, soil and
                     weather information.
                 </p>
-                <a href="#">View Advice →</a>
+
+                <a href="{% url 'irrigation' %}" id="irrigation-link">
+                    View Advice →
+                </a>
+
             </div>
 
+
+            <!-- Market -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">💰</div>
-                <h3>Market Insights</h3>
-                <p>
+
+                <h3 id="market-title">
+                    Market Insights
+                </h3>
+
+                <p id="market-description">
                     View available current market information
                     for your crops.
                 </p>
-                <a href="#">Check Market →</a>
+
+                <a href="{% url 'market' %}" id="market-link">
+                    Check Market →
+                </a>
+
             </div>
 
+
+            <!-- AI Assistant -->
             <div class="dashboard-card">
+
                 <div class="dashboard-icon">🤖</div>
-                <h3>AI Agriculture Assistant</h3>
-                <p>
+
+                <h3 id="ai-title">
+                    AI Agriculture Assistant
+                </h3>
+
+                <p id="ai-description">
                     Ask agriculture-related questions and get
                     useful guidance.
                 </p>
-                <a href="#">Ask AI →</a>
+
+                <a href="{% url 'ai_assistant' %}" id="ai-link">
+                    Ask AI →
+                </a>
+
             </div>
 
         </div>
 
+
         <div class="quick-insight">
-            <h2>🌱 Your Farm at a Glance</h2>
-            <p>
+
+            <h2 id="farm-title">
+                🌱 Your Farm at a Glance
+            </h2>
+
+            <p id="farm-description">
                 Your personalized farm information, crop history,
                 alerts and recommendations will appear here.
             </p>
+
         </div>
 
     </main>
 
 </div>
+
+
+<script>
+
+function changeLanguage(language) {
+
+    const translations = {
+
+        en: {
+            welcome: "Welcome, Farmer 👨‍🌾",
+            dashboard: "Farmer Dashboard",
+            dashboardDesc: "Manage your farm and access smart agricultural insights from one place.",
+
+            crop: "Crop Recommendation",
+            cropDesc: "Get suitable crop suggestions based on soil, weather and farm conditions.",
+            cropLink: "Explore →",
+
+            scanner: "Crop Scanner",
+            scannerDesc: "Upload a crop or vegetable image for AI-based identification and health insights.",
+            scannerLink: "Scan Crop →",
+
+            weather: "Weather",
+            weatherDesc: "Check location-based weather conditions and farming alerts.",
+            weatherLink: "View Weather →",
+
+            irrigation: "Smart Irrigation",
+            irrigationDesc: "Get irrigation guidance using crop, soil and weather information.",
+            irrigationLink: "View Advice →",
+
+            market: "Market Insights",
+            marketDesc: "View available current market information for your crops.",
+            marketLink: "Check Market →",
+
+            ai: "AI Agriculture Assistant",
+            aiDesc: "Ask agriculture-related questions and get useful guidance.",
+            aiLink: "Ask AI →",
+
+            farm: "🌱 Your Farm at a Glance",
+            farmDesc: "Your personalized farm information, crop history, alerts and recommendations will appear here."
+        },
+
+
+        te: {
+            welcome: "స్వాగతం, రైతు గారు 👨‍🌾",
+            dashboard: "రైతు డ్యాష్‌బోర్డ్",
+            dashboardDesc: "మీ వ్యవసాయాన్ని నిర్వహించండి మరియు స్మార్ట్ వ్యవసాయ సమాచారాన్ని ఒకే చోట పొందండి.",
+
+            crop: "పంట సిఫార్సు",
+            cropDesc: "నేల, వాతావరణం మరియు వ్యవసాయ పరిస్థితుల ఆధారంగా సరైన పంటలను సూచిస్తుంది.",
+            cropLink: "చూడండి →",
+
+            scanner: "పంట స్కానర్",
+            scannerDesc: "AI ఆధారిత పంట గుర్తింపు మరియు ఆరోగ్య సమాచారం కోసం పంట లేదా కూరగాయ చిత్రాన్ని అప్‌లోడ్ చేయండి.",
+            scannerLink: "పంట స్కాన్ చేయండి →",
+
+            weather: "వాతావరణం",
+            weatherDesc: "ప్రాంతానికి సంబంధించిన వాతావరణ పరిస్థితులు మరియు వ్యవసాయ హెచ్చరికలను చూడండి.",
+            weatherLink: "వాతావరణం చూడండి →",
+
+            irrigation: "స్మార్ట్ నీటిపారుదల",
+            irrigationDesc: "పంట, నేల మరియు వాతావరణ సమాచారం ఆధారంగా నీటిపారుదల సూచనలు పొందండి.",
+            irrigationLink: "సూచన చూడండి →",
+
+            market: "మార్కెట్ సమాచారం",
+            marketDesc: "మీ పంటలకు సంబంధించిన ప్రస్తుత మార్కెట్ సమాచారాన్ని చూడండి.",
+            marketLink: "మార్కెట్ చూడండి →",
+
+            ai: "AI వ్యవసాయ సహాయకుడు",
+            aiDesc: "వ్యవసాయానికి సంబంధించిన ప్రశ్నలు అడిగి ఉపయోగకరమైన సూచనలు పొందండి.",
+            aiLink: "AI ని అడగండి →",
+
+            farm: "🌱 మీ వ్యవసాయ సమాచారం",
+            farmDesc: "మీ వ్యక్తిగత వ్యవసాయ సమాచారం, పంట చరిత్ర, హెచ్చరికలు మరియు సిఫార్సులు ఇక్కడ కనిపిస్తాయి."
+        },
+
+
+        hi: {
+            welcome: "स्वागत है, किसान जी 👨‍🌾",
+            dashboard: "किसान डैशबोर्ड",
+            dashboardDesc: "अपने खेत का प्रबंधन करें और स्मार्ट कृषि जानकारी एक ही जगह प्राप्त करें।",
+
+            crop: "फसल सुझाव",
+            cropDesc: "मिट्टी, मौसम और खेत की परिस्थितियों के आधार पर उपयुक्त फसल सुझाव प्राप्त करें।",
+            cropLink: "देखें →",
+
+            scanner: "फसल स्कैनर",
+            scannerDesc: "AI आधारित पहचान और स्वास्थ्य जानकारी के लिए फसल या सब्जी की तस्वीर अपलोड करें।",
+            scannerLink: "फसल स्कैन करें →",
+
+            weather: "मौसम",
+            weatherDesc: "अपने क्षेत्र की मौसम स्थिति और कृषि चेतावनियां देखें।",
+            weatherLink: "मौसम देखें →",
+
+            irrigation: "स्मार्ट सिंचाई",
+            irrigationDesc: "फसल, मिट्टी और मौसम की जानकारी के आधार पर सिंचाई सुझाव प्राप्त करें।",
+            irrigationLink: "सलाह देखें →",
+
+            market: "बाजार जानकारी",
+            marketDesc: "अपनी फसलों से संबंधित वर्तमान बाजार जानकारी देखें।",
+            marketLink: "बाजार देखें →",
+
+            ai: "AI कृषि सहायक",
+            aiDesc: "कृषि से संबंधित प्रश्न पूछें और उपयोगी मार्गदर्शन प्राप्त करें।",
+            aiLink: "AI से पूछें →",
+
+            farm: "🌱 आपके खेत की जानकारी",
+            farmDesc: "आपकी व्यक्तिगत खेत की जानकारी, फसल इतिहास, चेतावनियां और सुझाव यहां दिखाई देंगे।"
+        }
+
+    };
+
+
+    const t = translations[language];
+
+
+    document.getElementById("welcome-text").textContent = t.welcome;
+
+    document.getElementById("dashboard-title").textContent = t.dashboard;
+    document.getElementById("dashboard-description").textContent = t.dashboardDesc;
+
+    document.getElementById("crop-title").textContent = t.crop;
+    document.getElementById("crop-description").textContent = t.cropDesc;
+    document.getElementById("crop-link").textContent = t.cropLink;
+
+    document.getElementById("scanner-title").textContent = t.scanner;
+    document.getElementById("scanner-description").textContent = t.scannerDesc;
+    document.getElementById("scanner-link").textContent = t.scannerLink;
+
+    document.getElementById("weather-title").textContent = t.weather;
+    document.getElementById("weather-description").textContent = t.weatherDesc;
+    document.getElementById("weather-link").textContent = t.weatherLink;
+
+    document.getElementById("irrigation-title").textContent = t.irrigation;
+    document.getElementById("irrigation-description").textContent = t.irrigationDesc;
+    document.getElementById("irrigation-link").textContent = t.irrigationLink;
+
+    document.getElementById("market-title").textContent = t.market;
+    document.getElementById("market-description").textContent = t.marketDesc;
+    document.getElementById("market-link").textContent = t.marketLink;
+
+    document.getElementById("ai-title").textContent = t.ai;
+    document.getElementById("ai-description").textContent = t.aiDesc;
+    document.getElementById("ai-link").textContent = t.aiLink;
+
+    document.getElementById("farm-title").textContent = t.farm;
+    document.getElementById("farm-description").textContent = t.farmDesc;
+}
+
+</script>
 
 </body>
 </html>

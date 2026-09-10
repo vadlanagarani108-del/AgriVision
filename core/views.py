@@ -1,21 +1,23 @@
+import requests
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import RegistrationForm, LoginForm
 from .models import CropAnalysis
 from .services.ai_service import analyze_crop_image
-def home(request): 
+
+
+def home(request):
     return render(request, "core/index.html")
 
 
 def register(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
-
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
             user.save()
-
             login(request, user)
             return redirect("dashboard")
     else:
@@ -42,10 +44,7 @@ def login_view(request):
                 login(request, user)
                 return redirect("dashboard")
 
-            form.add_error(
-                None,
-                "Invalid username or password."
-            )
+            form.add_error(None, "Invalid username or password.")
     else:
         form = LoginForm()
 
@@ -71,6 +70,7 @@ def scanner(request):
                 user=request.user,
                 image=image
             )
+
             result = analyze_crop_image(analysis.image.path)
 
             analysis.crop_name = result["crop_name"]
@@ -84,11 +84,72 @@ def scanner(request):
                 "core/scanner.html",
                 {
                     "analysis": analysis,
-                    "confidence": 0
+                    "confidence": result["confidence"]
                 }
             )
+
+    return render(request, "core/scanner.html")
+
+
 def recommendation(request):
     if not request.user.is_authenticated:
         return redirect("login")
 
     return render(request, "core/recommendation.html")
+
+
+def weather(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    try:
+        url = "https://api.open-meteo.com/v1/forecast"
+
+        params = {
+            "latitude": 14.4674,
+            "longitude": 78.8241,
+            "current": "temperature_2m,relative_humidity_2m,wind_speed_10m",
+            "daily": "precipitation_probability_max",
+            "timezone": "auto"
+        }
+
+        response = requests.get(url, params=params, timeout=10)
+        data = response.json()
+
+        weather_data = {
+            "temperature": data["current"]["temperature_2m"],
+            "humidity": data["current"]["relative_humidity_2m"],
+            "wind": data["current"]["wind_speed_10m"],
+            "rain_chance": data["daily"]["precipitation_probability_max"][0],
+        }
+
+    except Exception as error:
+        print("Weather API Error:", error)
+        weather_data = None
+
+    return render(
+        request,
+        "core/weather.html",
+        {"weather": weather_data}
+    )
+
+
+def irrigation(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    return render(request, "core/irrigation.html")
+
+
+def market(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    return render(request, "core/market.html")
+
+
+def ai_assistant(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    return render(request, "core/ai_assistant.html")

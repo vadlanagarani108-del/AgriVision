@@ -1,0 +1,426 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>AI Agriculture Assistant | AgriVision</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f1f8f3;
+        color: #1b4332;
+    }
+
+    .container {
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .language-selector select {
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: white;
+        color: #14532d;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .chat-box {
+        margin-top: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        padding: 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        box-sizing: border-box;
+        resize: vertical;
+        font-size: 15px;
+    }
+
+    button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 10px;
+        background: #2d6a4f;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1b4332;
+    }
+
+    .answer {
+        margin-top: 25px;
+        background: #f0fdf4;
+        padding: 20px;
+        border-radius: 12px;
+        line-height: 1.6;
+        display: none;
+    }
+
+    .examples {
+        margin-top: 25px;
+        background: #e8f5e9;
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .examples p {
+        margin: 8px 0;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        margin: 25px auto 0;
+        padding: 12px 25px;
+        background: #2d6a4f;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+        .card {
+            padding: 22px;
+        }
+
+        .top-bar {
+            margin-bottom: 10px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<div class="card">
+
+    <div class="top-bar">
+        <div class="language-selector">
+            🌐
+            <select id="languageSelect" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="te">తెలుగు</option>
+                <option value="hi">हिंदी</option>
+            </select>
+        </div>
+    </div>
+
+    <h1 id="page-title">🤖 AI Agriculture Assistant</h1>
+
+    <p class="subtitle" id="subtitle">
+        Ask agriculture-related questions and get simple guidance
+    </p>
+
+    <div class="chat-box">
+
+        <label for="question" id="question-label">
+            🌱 Ask your question
+        </label>
+
+        <textarea
+            id="question"
+            placeholder="Example: When should I irrigate my crop?"
+        ></textarea>
+
+        <button onclick="askAssistant()" id="ask-button">
+            🤖 Ask AI
+        </button>
+
+        <div class="answer" id="answerBox">
+
+            <strong id="suggestion-title">
+                💡 AI Suggestion:
+            </strong>
+
+            <p id="answerText"></p>
+
+        </div>
+
+    </div>
+
+    <div class="examples">
+
+        <strong id="examples-title">
+            💬 Example Questions
+        </strong>
+
+        <p id="example1">🌾 How can I improve crop growth?</p>
+
+        <p id="example2">💧 When should I irrigate my crop?</p>
+
+        <p id="example3">🐛 How can I control pests?</p>
+
+        <p id="example4">🌱 Which fertilizer is suitable for crops?</p>
+
+    </div>
+
+    <a href="{% url 'dashboard' %}" id="back-link">
+        ← Back to Dashboard
+    </a>
+
+</div>
+```
+
+</div>
+
+<script>
+
+const translations = {
+
+    en: {
+        title: "🤖 AI Agriculture Assistant",
+        subtitle: "Ask agriculture-related questions and get simple guidance",
+        questionLabel: "🌱 Ask your question",
+        placeholder: "Example: When should I irrigate my crop?",
+        askButton: "🤖 Ask AI",
+        suggestion: "💡 AI Suggestion:",
+        examples: "💬 Example Questions",
+        example1: "🌾 How can I improve crop growth?",
+        example2: "💧 When should I irrigate my crop?",
+        example3: "🐛 How can I control pests?",
+        example4: "🌱 Which fertilizer is suitable for crops?",
+        back: "← Back to Dashboard",
+
+        empty: "Please enter an agriculture-related question.",
+        irrigation: "Check the soil moisture before irrigation. Avoid unnecessary watering and consider rainfall conditions before irrigating your crop.",
+        growth: "Maintain proper soil moisture, use suitable fertilizers, provide adequate sunlight, and regularly monitor your crop for pests and diseases.",
+        pest: "Regularly inspect leaves and stems for pest activity. Maintain field hygiene and use suitable pest-management methods when required.",
+        fertilizer: "Choose fertilizer based on soil condition and crop requirements. A soil test can help identify nutrient requirements.",
+        general: "For better guidance, provide details such as the crop name, soil condition, irrigation status, and the problem you are observing."
+    },
+
+    te: {
+        title: "🤖 AI వ్యవసాయ సహాయకుడు",
+        subtitle: "వ్యవసాయానికి సంబంధించిన ప్రశ్నలు అడిగి సులభమైన సూచనలు పొందండి",
+        questionLabel: "🌱 మీ ప్రశ్న అడగండి",
+        placeholder: "ఉదాహరణ: నా పంటకు ఎప్పుడు నీరు పెట్టాలి?",
+        askButton: "🤖 AI ని అడగండి",
+        suggestion: "💡 AI సూచన:",
+        examples: "💬 ఉదాహరణ ప్రశ్నలు",
+        example1: "🌾 పంట పెరుగుదలను ఎలా మెరుగుపరచాలి?",
+        example2: "💧 నా పంటకు ఎప్పుడు నీరు పెట్టాలి?",
+        example3: "🐛 పురుగులను ఎలా నియంత్రించాలి?",
+        example4: "🌱 పంటలకు ఏ ఎరువు అనుకూలంగా ఉంటుంది?",
+        back: "← డ్యాష్‌బోర్డ్‌కు తిరిగి వెళ్లండి",
+
+        empty: "దయచేసి వ్యవసాయానికి సంబంధించిన ప్రశ్నను నమోదు చేయండి.",
+        irrigation: "నీటిపారుదల ముందు నేలలోని తేమను పరిశీలించండి. అవసరం లేకుండా నీరు పెట్టకండి మరియు వర్షం వచ్చే పరిస్థితులను పరిగణనలోకి తీసుకోండి.",
+        growth: "నేలలో సరైన తేమను నిర్వహించండి, తగిన ఎరువులను ఉపయోగించండి, తగినంత సూర్యకాంతిని అందించండి మరియు పురుగులు లేదా వ్యాధుల కోసం పంటను క్రమం తప్పకుండా పరిశీలించండి.",
+        pest: "ఆకులు మరియు కాండంపై పురుగుల సమస్యలను క్రమం తప్పకుండా పరిశీలించండి. పొలాన్ని శుభ్రంగా ఉంచండి మరియు అవసరమైనప్పుడు తగిన పురుగు నియంత్రణ పద్ధతులను ఉపయోగించండి.",
+        fertilizer: "నేల పరిస్థితి మరియు పంట అవసరాల ఆధారంగా ఎరువును ఎంచుకోండి. నేల పరీక్ష ద్వారా అవసరమైన పోషకాలను గుర్తించవచ్చు.",
+        general: "మెరుగైన సూచనల కోసం పంట పేరు, నేల పరిస్థితి, నీటిపారుదల స్థితి మరియు మీరు గమనిస్తున్న సమస్య వంటి వివరాలను ఇవ్వండి."
+    },
+
+    hi: {
+        title: "🤖 AI कृषि सहायक",
+        subtitle: "कृषि से संबंधित प्रश्न पूछें और सरल सुझाव प्राप्त करें",
+        questionLabel: "🌱 अपना प्रश्न पूछें",
+        placeholder: "उदाहरण: मेरी फसल में सिंचाई कब करनी चाहिए?",
+        askButton: "🤖 AI से पूछें",
+        suggestion: "💡 AI सुझाव:",
+        examples: "💬 उदाहरण प्रश्न",
+        example1: "🌾 फसल की वृद्धि कैसे सुधारें?",
+        example2: "💧 फसल में सिंचाई कब करनी चाहिए?",
+        example3: "🐛 कीटों को कैसे नियंत्रित करें?",
+        example4: "🌱 फसलों के लिए कौन सा उर्वरक उपयुक्त है?",
+        back: "← डैशबोर्ड पर वापस जाएं",
+
+        empty: "कृपया कृषि से संबंधित प्रश्न दर्ज करें.",
+        irrigation: "सिंचाई से पहले मिट्टी की नमी जांचें। अनावश्यक पानी देने से बचें और सिंचाई से पहले बारिश की स्थिति पर विचार करें।",
+        growth: "मिट्टी में उचित नमी बनाए रखें, उपयुक्त उर्वरकों का उपयोग करें, पर्याप्त धूप दें और कीटों तथा रोगों के लिए फसल की नियमित जांच करें।",
+        pest: "पत्तियों और तनों पर कीटों की नियमित जांच करें। खेत की स्वच्छता बनाए रखें और आवश्यकता होने पर उचित कीट नियंत्रण उपायों का उपयोग करें।",
+        fertilizer: "मिट्टी की स्थिति और फसल की आवश्यकताओं के आधार पर उर्वरक चुनें। मिट्टी की जांच से आवश्यक पोषक तत्वों की पहचान करने में मदद मिल सकती है।",
+        general: "बेहतर सुझाव के लिए फसल का नाम, मिट्टी की स्थिति, सिंचाई की स्थिति और दिखाई देने वाली समस्या जैसी जानकारी दें।"
+    }
+
+};
+
+
+let currentLanguage = "en";
+
+
+function changeLanguage(language) {
+
+    currentLanguage = language;
+
+    const t = translations[language];
+
+    document.getElementById("page-title").textContent = t.title;
+    document.getElementById("subtitle").textContent = t.subtitle;
+    document.getElementById("question-label").textContent = t.questionLabel;
+
+    document.getElementById("question").placeholder = t.placeholder;
+
+    document.getElementById("ask-button").textContent = t.askButton;
+    document.getElementById("suggestion-title").textContent = t.suggestion;
+
+    document.getElementById("examples-title").textContent = t.examples;
+
+    document.getElementById("example1").textContent = t.example1;
+    document.getElementById("example2").textContent = t.example2;
+    document.getElementById("example3").textContent = t.example3;
+    document.getElementById("example4").textContent = t.example4;
+
+    document.getElementById("back-link").textContent = t.back;
+
+    const answerBox = document.getElementById("answerBox");
+
+    if (answerBox.style.display === "block") {
+        document.getElementById("answerText").textContent =
+            t.general;
+    }
+}
+
+
+function askAssistant() {
+
+    const question = document
+        .getElementById("question")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const answerBox = document.getElementById("answerBox");
+    const answerText = document.getElementById("answerText");
+
+    const t = translations[currentLanguage];
+
+
+    if (question === "") {
+
+        answerText.textContent = t.empty;
+
+        answerBox.style.display = "block";
+
+        return;
+    }
+
+
+    let answer;
+
+
+    if (
+        question.includes("irrigat") ||
+        question.includes("water") ||
+        question.includes("నీరు") ||
+        question.includes("నీట") ||
+        question.includes("सिंचाई") ||
+        question.includes("पानी")
+    ) {
+
+        answer = t.irrigation;
+
+    }
+
+    else if (
+        question.includes("growth") ||
+        question.includes("grow") ||
+        question.includes("పెరుగ") ||
+        question.includes("वृद्धि") ||
+        question.includes("बढ़")
+    ) {
+
+        answer = t.growth;
+
+    }
+
+    else if (
+        question.includes("pest") ||
+        question.includes("insect") ||
+        question.includes("పురుగు") ||
+        question.includes("कीट")
+    ) {
+
+        answer = t.pest;
+
+    }
+
+    else if (
+        question.includes("fertilizer") ||
+        question.includes("fertiliser") ||
+        question.includes("ఎరువు") ||
+        question.includes("उर्वरक")
+    ) {
+
+        answer = t.fertilizer;
+
+    }
+
+    else {
+
+        answer = t.general;
+
+    }
+
+
+    answerText.textContent = answer;
+
+    answerBox.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
